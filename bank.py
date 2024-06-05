@@ -16,24 +16,28 @@ numero_saques = 0
 LIMITE_SAQUES = 3
 
 while True:
-    opcao= input(menu)
+    opcao = input(menu)
 
     if opcao == "d":
         print("Deposito: ")
         valor = float(input("Valor do deposito: "))
+        if valor < 0:
+            print("Valor inválido")
+            print(opcao)
+            saldo -= valor
         saldo += valor
         extrato += f"Deposito : R$ {valor:.2f}\n"
-        
+       
 
 
     elif opcao == "s":
         print("Saque: ")
         if numero_saques < LIMITE_SAQUES:
             valor = float(input("Valor do saque: "))
-        if valor <= saldo and valor <= limite:
-            saldo -= valor
-            extrato += f"Saque: R$ {valor:.2f}\n"
-            numero_saques += 1
+            if valor <= saldo and valor <= limite:
+                saldo -= valor
+                extrato += f"Saque: R$ {valor:.2f}\n"
+                numero_saques += 1
         else:
             print("Não foi possivel realizar o saque, Verifique o saldo e o limite da conta!")
 
@@ -52,4 +56,3 @@ while True:
         break
 else:
     print("Opção Invalida!")
-    
